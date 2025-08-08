@@ -41,11 +41,12 @@
         background-color: var(
           --background-color
         );
-        overflow: hidden;
         overflow-x: hidden;
+        overflow-y: hidden;
         text-transform: uppercase;
         width: 100%;
         max-width: 100vw;
+        height: 100vh;
       }
 
       /* Loader */
@@ -123,6 +124,7 @@
         font-size: 1rem;
         margin-top: 0.5rem;
         margin-bottom: 5rem;
+        opacity: 1;
       }
 
       .title {
@@ -256,8 +258,9 @@
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        gap: 2rem; /* ridotto per mobile in media query */
+        gap: 2rem;
         font-size: 1rem;
+        opacity: 1;
       }
 
       .hero-footer a {
@@ -319,7 +322,7 @@
         }
 
         .header-center {
-          left: 0; /* centra invece di spostare a sinistra */
+          left: 0;
         }
 
         /* Hero title container */
@@ -348,7 +351,7 @@
 
         .sidebar-right {
           width: 120px;
-          right: 0.5rem; /* più vicino al bordo */
+          right: 0.5rem;
         }
 
         .sidebar-left h3,
