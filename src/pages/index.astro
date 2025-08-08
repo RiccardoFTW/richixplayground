@@ -314,7 +314,7 @@
 
         .hero-header {
           font-size: 0.7rem;
-          margin-bottom: 2rem;
+          margin-bottom: 1rem; /* ridotto da 2rem */
         }
 
         .title {
@@ -327,8 +327,8 @@
 
         /* Hero title container */
         .hero-title-container {
-          margin-bottom: 2rem;
-          margin-top: 4rem;
+          margin-bottom: 1rem;
+          margin-top: 2rem; /* ridotto da 4rem */
         }
 
         .hero-title {
@@ -347,11 +347,15 @@
         .sidebar-left {
           width: 150px;
           left: 0.3rem;
+          top: 40%; /* alzata dal 50% */
+          transform: translateY(-40%);
         }
 
         .sidebar-right {
           width: 120px;
           right: 0.5rem;
+          top: 40%; /* alzata dal 50% */
+          transform: translateY(-40%);
         }
 
         .sidebar-left h3,
@@ -386,6 +390,7 @@
         .hero-footer {
           gap: 1.5rem;
           font-size: 0.8rem;
+          bottom: 0.5rem; /* spostato leggermente più su */
         }
       }
 
@@ -405,6 +410,24 @@
         .project p,
         .sidebar-right p {
           font-size: 0.5rem;
+        }
+
+        /* Spazi ancora più ridotti per telefoni piccoli */
+        .hero-title-container {
+          margin-top: 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .hero-footer {
+          bottom: 0.2rem;
+          font-size: 0.7rem;
+        }
+
+        /* Sidebar ancora più in alto su telefoni piccoli */
+        .sidebar-left,
+        .sidebar-right {
+          top: 70%;
+          transform: translateY(-35%);
         }
       }
     </style>
