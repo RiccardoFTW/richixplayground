@@ -12,7 +12,7 @@
     />
     <meta
       name="viewport"
-      content="width=device-width"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta
       name="generator"
@@ -35,13 +35,17 @@
         box-sizing: border-box;
       }
 
+      html,
       body {
         font-family: "Neue", sans-serif;
         background-color: var(
           --background-color
         );
         overflow: hidden;
+        overflow-x: hidden;
         text-transform: uppercase;
+        width: 100%;
+        max-width: 100vw;
       }
 
       /* Loader */
@@ -252,7 +256,7 @@
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        gap: 6rem;
+        gap: 2rem; /* ridotto per mobile in media query */
         font-size: 1rem;
       }
 
@@ -315,7 +319,7 @@
         }
 
         .header-center {
-          left: -50px;
+          left: 0; /* centra invece di spostare a sinistra */
         }
 
         /* Hero title container */
@@ -343,8 +347,8 @@
         }
 
         .sidebar-right {
-          width: 150px;
-          right: 1.5rem;
+          width: 120px;
+          right: 0.5rem; /* più vicino al bordo */
         }
 
         .sidebar-left h3,
@@ -373,6 +377,12 @@
           font-size: 0.7rem;
           right: 0.5rem;
           top: 40%;
+        }
+
+        /* Footer mobile */
+        .hero-footer {
+          gap: 1.5rem;
+          font-size: 0.8rem;
         }
       }
 
