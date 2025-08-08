@@ -1,0 +1,703 @@
+---
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width"
+    />
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
+    <title>Riccardo x Playground</title>
+    <style>
+      @font-face {
+        font-family: "Neue";
+        src: url("/font/NeueMontreal-Regular.otf");
+      }
+      :root {
+        --background-color: #0000ee;
+        --primary-color: #fff;
+        --secondary-color: #000;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Neue", sans-serif;
+        background-color: var(
+          --background-color
+        );
+        overflow: hidden;
+        text-transform: uppercase;
+      }
+
+      /* Loader */
+      .loading-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .text-line {
+        font-size: 9rem;
+        opacity: 0;
+      }
+
+      .hello {
+        transform: translateX(-100px);
+      }
+
+      .playground {
+        color: var(--primary-color);
+        transform: translateX(100px);
+      }
+
+      .im {
+        transform: translateX(-100px);
+      }
+
+      .riccardo {
+        color: var(--primary-color);
+        transform: translateX(100px);
+      }
+
+      .nice-row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .nice-text {
+        transform: translateX(-100px);
+        margin-left: 70px;
+      }
+
+      .smile {
+        color: var(--primary-color);
+        transform: translateY(50px);
+      }
+
+      /* Main */
+
+      .hero-section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0;
+        background-color: var(
+          --background-color
+        );
+        color: var(--primary-color);
+        display: grid;
+        grid-template-rows: auto 1fr;
+        padding: 0.5rem;
+      }
+
+      /* Header */
+      .hero-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 5rem;
+      }
+
+      .title {
+        display: flex;
+      }
+
+      .title-x {
+        color: var(--secondary-color);
+        font-weight: bold;
+      }
+
+      .header-center {
+        position: relative;
+        left: -200px;
+        color: var(--secondary-color);
+      }
+
+      /* Main content */
+      .hero-title-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 8rem;
+        margin-bottom: 4rem;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        font-weight: normal;
+        line-height: 0.9;
+      }
+
+      .hero-subtitle {
+        font-size: 2rem;
+        font-weight: normal;
+        line-height: 0.9;
+        color: var(--secondary-color);
+      }
+
+      .passion {
+        font-size: 3rem;
+        font-weight: normal;
+        line-height: 0.9;
+        color: var(--primary-color);
+      }
+
+      .vertical-text {
+        position: absolute;
+        right: 0rem;
+        top: 30%;
+        transform: rotate(-90deg)
+          translateX(50%);
+        transform-origin: center;
+        font-size: 1rem;
+      }
+
+      /* Sidebar Left */
+      .sidebar-left {
+        position: absolute;
+        left: 1rem;
+        top: 80%;
+        transform: translateY(-50%);
+        width: 300px;
+      }
+
+      .lab-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+      }
+
+      .project {
+        margin-bottom: 1rem;
+      }
+
+      .project h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: var(--secondary-color);
+      }
+
+      .project p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        opacity: 0.8;
+      }
+
+      /* Sidebar Right */
+      .sidebar-right {
+        position: absolute;
+        right: 1rem;
+        top: 80%;
+        transform: translateY(-50%);
+        width: 300px;
+        text-align: right;
+      }
+
+      .sidebar-right div {
+        margin-bottom: 1rem;
+      }
+
+      .sidebar-right h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--secondary-color);
+      }
+
+      .sidebar-right p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        opacity: 0.8;
+      }
+
+      /* Link styles */
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Footer */
+      .hero-footer {
+        position: absolute;
+        bottom: 0.3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6rem;
+        font-size: 1rem;
+      }
+
+      .hero-footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .hero-footer a:hover {
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Loader */
+      @media (max-width: 768px) {
+        .text-line {
+          font-size: 4rem;
+        }
+
+        .loading-container {
+          padding: 1rem;
+          gap: 1rem;
+        }
+
+        .nice-row {
+          flex-direction: column !important;
+          gap: 1rem;
+          align-items: center;
+        }
+
+        .nice-text {
+          margin-left: 0;
+          transform: translateX(0);
+        }
+
+        .smile {
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .text-line {
+          font-size: 3rem;
+        }
+      }
+
+      /* Hero */
+      @media (max-width: 768px) {
+        .hero-section {
+          padding: 0.5rem;
+        }
+
+        .hero-header {
+          font-size: 0.7rem;
+          margin-bottom: 2rem;
+        }
+
+        .title {
+          font-size: 0.8rem;
+        }
+
+        .header-center {
+          left: -50px;
+        }
+
+        /* Hero title container */
+        .hero-title-container {
+          margin-bottom: 2rem;
+          margin-top: 4rem;
+        }
+
+        .hero-title {
+          font-size: 1.8rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.8rem;
+        }
+
+        .passion {
+          font-size: 1.4rem;
+        }
+
+        /* Sidebar */
+        .sidebar-left {
+          width: 150px;
+          left: 0.3rem;
+        }
+
+        .sidebar-right {
+          width: 150px;
+          right: 1.5rem;
+        }
+
+        .sidebar-left h3,
+        .sidebar-right h3 {
+          font-size: 0.8rem;
+          margin-bottom: 1rem;
+        }
+
+        .project h4 {
+          font-size: 0.7rem;
+        }
+
+        .project p,
+        .sidebar-right p {
+          font-size: 0.5rem;
+          line-height: 1.3;
+        }
+
+        /* Footer */
+        .hero-footer {
+          font-size: 0.7rem;
+          gap: 1rem;
+        }
+
+        .vertical-text {
+          font-size: 0.7rem;
+          right: 0.5rem;
+          top: 40%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 1.8rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.8rem;
+        }
+
+        .passion {
+          font-size: 1.4rem;
+        }
+
+        .project p,
+        .sidebar-right p {
+          font-size: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!--Loader -->
+    <div class="loading-container">
+      <div class="text-line hello">
+        Hello
+      </div>
+      <div class="text-line playground">
+        Playground
+      </div>
+      <div class="text-line im">
+        i'm
+      </div>
+      <div class="text-line riccardo">
+        Riccardo
+      </div>
+      <div class="nice-row">
+        <div
+          class="text-line nice-text"
+        >
+          Nice to meet u
+        </div>
+        <div class="text-line smile">
+          :)
+        </div>
+      </div>
+    </div>
+    <!--Hero -->
+    <div class="hero-section">
+      <!--Header -->
+      <header class="hero-header">
+        <div class="title">
+          <div class="title-left">
+            riccardo
+          </div>
+          <div class="title-x">x</div>
+          <div class="title-right">
+            playground
+          </div>
+        </div>
+        <div class="header-center">
+          2025
+        </div>
+        <div class="header-right">
+          application portfolio
+        </div>
+      </header>
+      <!--Main -->
+      <main class="hero-main">
+        <div
+          class="hero-title-container"
+        >
+          <span class="hero-title"
+            >junior frontend developer</span
+          >
+          <span class="hero-subtitle"
+            >with a strong passion for:</span
+          >
+          <span class="passion"
+            >development//design//creativity</span
+          >
+        </div>
+
+        <div class="vertical-text">
+          <a
+            href="mailto:r.ventura.dev@gmail.com"
+            >email</a
+          >
+        </div>
+      </main>
+      <!-- Sidebar Left -->
+      <aside class="sidebar-left">
+        <div class="lab-section">
+          <h3>lab</h3>
+
+          <div class="project">
+            <h4>
+              <a
+                href="https://riccardoftw.github.io/sushiamo/"
+                target="_blank"
+                >sushiamo</a
+              >
+            </h4>
+            <p>
+              3D visualization created<br
+              />
+              with React, Three.js,<br
+              />
+              React Three Fiber,<br /> React
+              Three Drei.
+            </p>
+          </div>
+
+          <div class="project">
+            <h4>
+              <a
+                href="https://riccardoftw.github.io/ThreeXgsap/"
+                target="_blank"
+                >playground (no, it's
+                not you!)</a
+              >
+            </h4>
+            <p>
+              A little experiment<br />
+              created ThreeJs <br />
+              and gsap
+            </p>
+          </div>
+
+          <div class="project">
+            <h4>
+              <a
+                href="https://riccardoftw.github.io/pantone/"
+                target="_blank"
+                >pantone (the desktop
+                version is much better,
+                sorry)</a
+              >
+            </h4>
+            <p>
+              A one-page website built
+              using the works of one of
+              my favorite artists:
+              Felipe Pantone.Project
+              created with GSAP and
+              Lenis.
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Sidebar Right -->
+      <aside class="sidebar-right">
+        <div class="skills-section">
+          <h3>skills</h3>
+          <p>
+            frontend development<br
+            />html css js astro react<br
+            />three.js r3f gsap
+          </p>
+        </div>
+
+        <div class="ux-section">
+          <h3>ux/ui principles</h3>
+          <p>
+            interaction design<br
+            />prototyping
+          </p>
+        </div>
+
+        <div class="tools-section">
+          <h3>no-code tools</h3>
+          <p>webflow<br />lottie</p>
+        </div>
+      </aside>
+      <!-- Footer -->
+      <footer class="hero-footer">
+        <a
+          href="https://linkedin.com/in/tuoprofilo"
+          target="_blank">LINKEDIN</a
+        >
+        <a
+          href="https://github.com/tuousername"
+          target="_blank">GITHUB</a
+        >
+        <a
+          href="/resume.pdf"
+          target="_blank">RESUME</a
+        >
+      </footer>
+    </div>
+    <script>
+      import { gsap } from "gsap";
+
+      const tl = gsap.timeline();
+
+      tl.to(".text-line:not(.smile)", {
+        opacity: 1,
+        x: 0,
+        duration: 3,
+        ease: "power2.out",
+        stagger: 0.6,
+      });
+
+      tl.to(
+        ".smile",
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          duration: 2,
+          ease: "power2.out",
+        },
+        "+=0.5"
+      );
+
+      tl.to(
+        ".text-line:not(.smile)",
+        {
+          opacity: 0,
+          y: -100,
+          duration: 0.6,
+          ease: "power2.in",
+          stagger: 0.1,
+        },
+        "+=0.2"
+      );
+
+      tl.to(
+        ".smile",
+        {
+          opacity: 0,
+          y: -600,
+          duration: 0.6,
+          ease: "power2.in",
+          stagger: 0.1,
+        },
+        "+=0.4"
+      );
+
+      tl.to(
+        ".loading-container",
+        {
+          opacity: 0,
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        "+=0.5"
+      ).to(
+        ".hero-section",
+        {
+          opacity: 1,
+          duration: 1,
+          ease: "power2.inOut",
+        },
+        "-=0.5"
+      );
+
+      tl.from(".hero-header", {
+        y: -50,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+      })
+        .from(
+          ".hero-title",
+          {
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.7"
+        )
+        .from(
+          ".hero-subtitle",
+          {
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        )
+        .from(
+          ".sidebar-left",
+          {
+            x: -100,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        )
+        .from(
+          ".sidebar-right",
+          {
+            x: 100,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.8"
+        )
+        .from(
+          ".hero-footer",
+          {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        )
+        .from(
+          ".vertical-text",
+          {
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        );
+    </script>
+  </body>
+</html>
