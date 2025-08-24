@@ -1,4 +1,4 @@
-# 🎨 Riccardo x Playground
+# 🔵 Riccardo x Playground
 
 Developed in **Astro** e **GSAP**
 
