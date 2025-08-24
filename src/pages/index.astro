@@ -119,7 +119,7 @@ inject();
         color: var(--primary-color);
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* inizia dall'alto */
+        justify-content: flex-start;
         padding: 1rem;
       }
 
@@ -158,8 +158,8 @@ inject();
         justify-content: center;
         align-items: center;
         text-align: center;
-        margin-top: 8rem; /* ulteriormente ridotto */
-        margin-bottom: 1rem; /* ridotto */
+        margin-top: 8rem;
+        margin-bottom: 1rem;
       }
 
       .hero-title {
@@ -264,7 +264,6 @@ inject();
         color: inherit;
       }
 
-      /* Quadrato hover da sinistra a destra */
       a::before {
         content: "";
         position: absolute;
@@ -285,6 +284,16 @@ inject();
 
       a:hover {
         color: var(--secondary-color);
+      }
+
+      @media (max-width: 768px) {
+        a::before {
+          display: none !important;
+        }
+
+        a:hover {
+          color: inherit !important;
+        }
       }
 
       /* Footer */
