@@ -199,7 +199,7 @@ inject();
         left: 1rem;
         top: 75%;
         transform: translateY(-50%);
-        width: 300px;
+        width: 400px;
       }
 
       .lab-section h3 {
@@ -258,20 +258,33 @@ inject();
 
       /* Link styles */
       a {
-        color: inherit;
+        position: relative;
+        padding: 1px 2px;
         text-decoration: none;
-        transition: all 0.3s ease;
+        color: inherit;
+      }
+
+      /* Quadrato hover da sinistra a destra */
+      a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: var(
+          --primary-color
+        );
+        transition: width 0.3s ease;
+        z-index: -1;
+      }
+
+      a:hover::before {
+        width: 100%;
       }
 
       a:hover {
-        opacity: 0.7;
-        transition: all 0.3s ease;
-      }
-
-      .project h4 a:hover {
-        color: var(
-          --primary-color
-        ) !important;
+        color: var(--secondary-color);
       }
 
       /* Footer */
@@ -292,8 +305,7 @@ inject();
       }
 
       .hero-footer a:hover {
-        opacity: 0.7;
-        transition: opacity 0.3s ease;
+        color: var(--secondary-color);
       }
 
       /* Loader */
@@ -564,9 +576,7 @@ inject();
               <a
                 href="https://riccardoftw.github.io/pantone/"
                 target="_blank"
-                >pantone (the desktop
-                version is much better,
-                sorry)</a
+                >pantone</a
               >
             </h4>
             <p>
@@ -575,7 +585,8 @@ inject();
               my favorite artists:
               Felipe Pantone.Project
               created with GSAP and
-              Lenis.
+              Lenis.<br /> (the desktop version
+              is much better, sorry)
             </p>
           </div>
         </div>
