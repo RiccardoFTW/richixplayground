@@ -1,5 +1,7 @@
 ---
+import { inject } from "@vercel/analytics";
 
+inject();
 ---
 
 <html lang="en">
@@ -28,11 +30,44 @@
         --background-color: #0000ee;
         --primary-color: #fff;
         --secondary-color: #000;
+        --tertiary-color: #959595;
       }
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        user-select: none; /* impedisce selezione testo */
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+      }
+      .hero-section * {
+        cursor: none;
+      }
+      @media (max-width: 768px) {
+        .cursor {
+          display: none !important;
+        }
+        .hero-section * {
+          cursor: auto;
+        }
+      }
+
+      .cursor {
+        --circle-size: 20px;
+        position: fixed;
+        height: var(--circle-size);
+        width: var(--circle-size);
+        border: 1px solid white;
+        border-radius: 100%;
+        top: calc(
+          var(--circle-size) / 2 * -1
+        );
+        left: calc(
+          var(--circle-size) / 2 * -1
+        );
+        pointer-events: none;
+        opacity: 0; /* nascosto inizialmente */
+        z-index: 9999; /* sopra tutti gli altri elementi */
       }
 
       html,
@@ -142,6 +177,10 @@
         color: var(--secondary-color);
       }
 
+      .header-right {
+        color: var(--tertiary-color);
+      }
+
       /* Main content */
       .hero-title-container {
         display: flex;
@@ -157,6 +196,7 @@
         font-size: 3rem;
         font-weight: normal;
         line-height: 0.9;
+        color: var(--tertiary-color);
       }
 
       .hero-subtitle {
@@ -195,7 +235,7 @@
       .lab-section h3 {
         font-size: 1.2rem;
         margin-bottom: 1rem;
-        color: var(--secondary-color);
+        color: var(--tertiary-color);
       }
 
       .project {
@@ -228,6 +268,12 @@
         margin-bottom: 1rem;
       }
 
+      .skills-title {
+        color: var(
+          --tertiary-color
+        ) !important;
+      }
+
       .sidebar-right h3 {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
@@ -244,11 +290,19 @@
       a {
         color: inherit;
         text-decoration: none;
+        transition: all 0.3s ease;
       }
 
       a:hover {
         opacity: 0.7;
-        transition: opacity 0.3s ease;
+        transition: all 0.3s ease;
+      }
+
+      /* Hover specifico per i progetti del LAB */
+      .project h4 a:hover {
+        color: var(
+          --primary-color
+        ) !important;
       }
 
       /* Footer */
@@ -314,8 +368,8 @@
 
         .hero-header {
           font-size: 0.7rem;
-          margin-bottom: 1rem; /* ridotto per far vedere l'header */
-          margin-top: 0.5rem; /* spazio dall'alto */
+          margin-bottom: 1rem;
+          margin-top: 0.5rem;
         }
 
         .title {
@@ -329,33 +383,33 @@
         /* Hero title container */
         .hero-title-container {
           margin-bottom: 0.5rem;
-          margin-top: 2rem; /* ridotto per bilanciare con header */
+          margin-top: 2rem;
         }
 
         .hero-title {
-          font-size: 1.6rem; /* ridotto per tablet */
+          font-size: 1.6rem;
         }
 
         .hero-subtitle {
-          font-size: 1.6rem; /* ridotto per tablet */
+          font-size: 1.6rem;
         }
 
         .passion {
-          font-size: 1.3rem; /* ridotto per tablet */
+          font-size: 1.3rem;
         }
 
         /* Sidebar */
         .sidebar-left {
           width: 150px;
           left: 0.3rem;
-          top: 55%; /* leggermente più in basso */
+          top: 55%;
           transform: translateY(-50%);
         }
 
         .sidebar-right {
           width: 120px;
           right: 0.5rem;
-          top: 55%; /* leggermente più in basso */
+          top: 55%;
           transform: translateY(-50%);
         }
 
@@ -379,7 +433,7 @@
         .hero-footer {
           font-size: 0.8rem;
           gap: 1.5rem;
-          bottom: 0.5rem !important; /* forza la posizione */
+          bottom: 0.5rem !important;
         }
 
         .vertical-text {
@@ -407,22 +461,19 @@
           font-size: 0.5rem;
         }
 
-        /* Spazi ancora più ridotti per telefoni piccoli */
         .hero-title-container {
-          margin-top: 1.5rem; /* bilanciato per mobile */
+          margin-top: 1.5rem;
           margin-bottom: 0.5rem;
         }
 
         .hero-footer {
-          bottom: 0.5rem !important; /* forza la posizione anche su mobile */
+          bottom: 0.5rem !important;
           font-size: 0.6rem;
           gap: 1rem;
         }
-
-        /* Sidebar posizionate meglio su telefoni piccoli */
         .sidebar-left,
         .sidebar-right {
-          top: 60%; /* spostate più in basso su mobile */
+          top: 60%;
           transform: translateY(-50%);
         }
       }
@@ -456,6 +507,8 @@
     </div>
     <!--Hero -->
     <div class="hero-section">
+      <!--Cursor -->
+      <div class="cursor"></div>
       <!--Header -->
       <header class="hero-header">
         <div class="title">
@@ -468,7 +521,7 @@
           </div>
         </div>
         <div class="header-center">
-          2025
+          ©2025
         </div>
         <div class="header-right">
           application portfolio
@@ -562,7 +615,9 @@
       <!-- Sidebar Right -->
       <aside class="sidebar-right">
         <div class="skills-section">
-          <h3>skills</h3>
+          <h3 class="skills-title">
+            skills
+          </h3>
           <div class="frontend-section">
             <h3>
               frontend development
@@ -736,6 +791,15 @@
             ease: "power2.out",
           },
           "-=0.5"
+        )
+        .to(
+          ".cursor",
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.3"
         );
     </script>
   </body>
