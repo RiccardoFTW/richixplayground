@@ -117,9 +117,10 @@ inject();
           --background-color
         );
         color: var(--primary-color);
-        display: grid;
-        grid-template-rows: auto 1fr;
-        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* inizia dall'alto */
+        padding: 1rem;
       }
 
       /* Header */
@@ -128,8 +129,6 @@ inject();
         justify-content: space-between;
         align-items: center;
         font-size: 1rem;
-        margin-top: 0.5rem;
-        margin-bottom: 5rem;
         opacity: 1;
       }
 
@@ -159,15 +158,15 @@ inject();
         justify-content: center;
         align-items: center;
         text-align: center;
-        margin-top: 8rem;
-        margin-bottom: 4rem;
+        margin-top: 8rem; /* ulteriormente ridotto */
+        margin-bottom: 1rem; /* ridotto */
       }
 
       .hero-title {
         font-size: 3rem;
         font-weight: normal;
         line-height: 0.9;
-        color: var(--tertiary-color);
+        color: var(--primary-color);
       }
 
       .hero-subtitle {
@@ -181,7 +180,7 @@ inject();
         font-size: 3rem;
         font-weight: normal;
         line-height: 0.9;
-        color: var(--primary-color);
+        color: var(--tertiary-color);
       }
 
       .vertical-text {
@@ -198,14 +197,14 @@ inject();
       .sidebar-left {
         position: absolute;
         left: 1rem;
-        top: 80%;
+        top: 75%;
         transform: translateY(-50%);
         width: 300px;
       }
 
       .lab-section h3 {
         font-size: 1.2rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         color: var(--tertiary-color);
       }
 
@@ -214,7 +213,7 @@ inject();
       }
 
       .project h4 {
-        font-size: 1rem;
+        font-size: 1.2rem;
         margin-bottom: 0.5rem;
         color: var(--secondary-color);
       }
@@ -229,7 +228,7 @@ inject();
       .sidebar-right {
         position: absolute;
         right: 1rem;
-        top: 80%;
+        top: 75%;
         transform: translateY(-50%);
         width: 300px;
         text-align: right;
