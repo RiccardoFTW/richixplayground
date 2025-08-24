@@ -36,38 +36,9 @@ inject();
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        user-select: none; /* impedisce selezione testo */
-        -webkit-user-select: none; /* Safari */
-        -moz-user-select: none; /* Firefox */
-      }
-      .hero-section * {
-        cursor: none;
-      }
-      @media (max-width: 768px) {
-        .cursor {
-          display: none !important;
-        }
-        .hero-section * {
-          cursor: auto;
-        }
-      }
-
-      .cursor {
-        --circle-size: 20px;
-        position: fixed;
-        height: var(--circle-size);
-        width: var(--circle-size);
-        border: 1px solid white;
-        border-radius: 100%;
-        top: calc(
-          var(--circle-size) / 2 * -1
-        );
-        left: calc(
-          var(--circle-size) / 2 * -1
-        );
-        pointer-events: none;
-        opacity: 0; /* nascosto inizialmente */
-        z-index: 9999; /* sopra tutti gli altri elementi */
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
       }
 
       html,
@@ -298,7 +269,6 @@ inject();
         transition: all 0.3s ease;
       }
 
-      /* Hover specifico per i progetti del LAB */
       .project h4 a:hover {
         color: var(
           --primary-color
