@@ -160,27 +160,35 @@ inject();
         text-align: center;
         margin-top: 8rem;
         margin-bottom: 1rem;
+        gap: 20px;
       }
 
       .hero-title {
-        font-size: 3rem;
+        font-size: 4rem;
         font-weight: normal;
         line-height: 0.9;
         color: var(--primary-color);
       }
 
       .hero-subtitle {
-        font-size: 2rem;
+        font-size: 3rem;
         font-weight: normal;
         line-height: 0.9;
         color: var(--secondary-color);
       }
 
-      .passion {
-        font-size: 3rem;
+      .passion-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 4rem;
         font-weight: normal;
         line-height: 0.9;
         color: var(--tertiary-color);
+      }
+
+      .stop {
+        color: var(--secondary-color);
       }
 
       .mail {
@@ -533,9 +541,15 @@ inject();
           <span class="hero-subtitle"
             >with a strong passion for:</span
           >
-          <span class="passion"
-            >development//design//creativity</span
+          <div
+            class="passion-container"
           >
+            <span>development</span>
+            <span class="stop">//</span>
+            <span>design</span>
+            <span class="stop">//</span>
+            <span>creativity</span>
+          </div>
         </div>
 
         <div class="mail">
@@ -718,15 +732,42 @@ inject();
           duration: 1,
           ease: "power2.inOut",
         },
-        "-=0.5"
+        "-=0.2"
       );
 
-      tl.from(".hero-header", {
-        y: -50,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out",
-      })
+      tl.from(
+        ".stop",
+        {
+          y: 10,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      );
+
+      tl.from(
+        ".passion-container:not(.stop)",
+        {
+          y: 10,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      );
+
+      tl.from(
+        ".hero-header",
+        {
+          y: -50,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.5"
+      )
+
         .from(
           ".hero-title",
           {
@@ -778,22 +819,13 @@ inject();
           "-=0.5"
         )
         .from(
-          ".vertical-text",
+          ".mail",
           {
             opacity: 0,
             duration: 1,
             ease: "power2.out",
           },
           "-=0.5"
-        )
-        .to(
-          ".cursor",
-          {
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.3"
         );
     </script>
   </body>
