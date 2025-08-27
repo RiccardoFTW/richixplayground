@@ -405,6 +405,12 @@ inject();
           font-size: 1.3rem;
         }
 
+        .zdog-canvas {
+          width: 180px;
+          height: 180px;
+          margin: 1.5rem auto;
+        }
+
         /* Sidebar */
         .sidebar-left {
           width: 150px;
@@ -415,7 +421,7 @@ inject();
 
         .sidebar-right {
           width: 120px;
-          right: 0.5rem;
+          right: 0rem;
           top: 55%;
           transform: translateY(-50%);
         }
@@ -446,7 +452,7 @@ inject();
         .mail {
           font-size: 0.7rem;
           right: 0.5rem;
-          top: 60%;
+          top: 30%;
         }
       }
     </style>
@@ -682,7 +688,7 @@ inject();
 
       let illo = new Zdog.Illustration({
         element: ".zdog-canvas",
-        zoom: 2, // valore originale
+        zoom: 2,
         dragRotate: true,
       });
 
