@@ -332,6 +332,13 @@ inject();
         z-index: 1;
       }
 
+      @media (min-width: 1200px) {
+        .zdog-canvas {
+          width: 300px;
+          height: 300px;
+        }
+      }
+
       /* Loader */
       @media (max-width: 768px) {
         .text-line {
@@ -449,8 +456,10 @@ inject();
       }
 
       .zdog-canvas {
-        width: 180px;
-        height: 180px;
+        width: 150px !important;
+        height: 150px !important;
+        margin: 1rem auto;
+        pointer-events: none;
       }
 
       @media (max-width: 480px) {
@@ -490,6 +499,12 @@ inject();
         .sidebar-right {
           top: 70%;
           transform: translateY(-50%);
+        }
+
+        .zdog-canvas {
+          width: 100px !important;
+          height: 100px !important;
+          pointer-events: none;
         }
       }
     </style>
