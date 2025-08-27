@@ -796,6 +796,29 @@ inject();
           z: 15,
         },
       });
+
+      function updateSmileSize() {
+        if (window.innerWidth <= 480) {
+          illo.zoom = 1;
+        } else if (
+          window.innerWidth <= 768
+        ) {
+          illo.zoom = 1.5;
+        } else if (
+          window.innerWidth >= 1200
+        ) {
+          illo.zoom = 3;
+        } else {
+          illo.zoom = 2;
+        }
+        illo.updateRenderGraph();
+      }
+
+      updateSmileSize();
+      window.addEventListener(
+        "resize",
+        updateSmileSize
+      );
       // --- animate --- //
       function animate() {
         currentRotationX +=
