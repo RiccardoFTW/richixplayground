@@ -164,14 +164,14 @@ inject();
       }
 
       .hero-title {
-        font-size: 4rem;
+        font-size: 3rem;
         font-weight: normal;
         line-height: 0.9;
         color: var(--primary-color);
       }
 
       .hero-subtitle {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: normal;
         line-height: 0.9;
         color: var(--secondary-color);
@@ -181,7 +181,7 @@ inject();
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 4rem;
+        font-size: 2.5rem;
         font-weight: normal;
         line-height: 0.9;
         color: var(--tertiary-color);
@@ -276,7 +276,7 @@ inject();
         content: "";
         position: absolute;
         top: 0;
-        left: 0;
+        right: 0;
         width: 0;
         height: 100%;
         background-color: var(
@@ -323,6 +323,13 @@ inject();
 
       .hero-footer a:hover {
         color: var(--secondary-color);
+      }
+      /* Canvas */
+      .zdog-canvas {
+        position: relative;
+        display: block;
+        margin: 2rem auto;
+        z-index: 1;
       }
 
       /* Loader */
@@ -392,7 +399,7 @@ inject();
           font-size: 1.6rem;
         }
 
-        .passion {
+        .passion-container {
           font-size: 1.3rem;
         }
 
@@ -441,6 +448,11 @@ inject();
         }
       }
 
+      .zdog-canvas {
+        width: 180px;
+        height: 180px;
+      }
+
       @media (max-width: 480px) {
         .hero-title {
           font-size: 1.8rem;
@@ -450,7 +462,7 @@ inject();
           font-size: 1.8rem;
         }
 
-        .passion {
+        .passion-container {
           font-size: 1.4rem;
         }
 
@@ -550,6 +562,12 @@ inject();
             <span class="stop">//</span>
             <span>creativity</span>
           </div>
+
+          <!-- Canvas -->
+          <canvas
+            class="zdog-canvas"
+            width="400"
+            height="400"></canvas>
         </div>
 
         <div class="mail">
@@ -668,6 +686,123 @@ inject();
         >
       </footer>
     </div>
+    <script
+      is:inline
+      src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"
+    ></script>
+    <script>
+      // Variabili tracking
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetRotationX = 0;
+      let targetRotationY = 0;
+      let currentRotationX = 0;
+      let currentRotationY = 0;
+
+      // Mouse tracking
+      document.addEventListener(
+        "mousemove",
+        (e) => {
+          mouseX =
+            (e.clientX /
+              window.innerWidth) *
+              2 -
+            1;
+          mouseY =
+            (e.clientY /
+              window.innerHeight) *
+              2 -
+            1;
+
+          targetRotationX =
+            -mouseY * 0.4;
+          targetRotationY =
+            -mouseX * 0.4;
+        }
+      );
+
+      let illo = new Zdog.Illustration({
+        element: ".zdog-canvas",
+        zoom: 2,
+      });
+
+      // --- model --//
+      // Head
+      let head = new Zdog.Ellipse({
+        addTo: illo,
+        diameter: 80,
+        stroke: 20,
+        color: "#0000ee",
+        fill: true,
+      });
+
+      let borderHead = new Zdog.Ellipse(
+        {
+          addTo: head,
+          diameter: 105,
+          color: "#000",
+          fill: true,
+          translate: { z: -4 },
+        }
+      );
+      // First eye
+      let eye = new Zdog.Ellipse({
+        addTo: head,
+        diameter: 8,
+        translate: {
+          x: -15,
+          y: -10,
+          z: 15,
+        },
+        stroke: 0.5,
+        color: "#fff",
+        fill: true,
+      });
+      // Second eye
+      eye.copy({
+        translate: {
+          x: 15,
+          y: -10,
+          z: 15,
+        },
+        fill: true,
+      });
+      // Smile
+      let smile = new Zdog.Ellipse({
+        addTo: head,
+        diameter: 40,
+        stroke: 5,
+        quarters: 2,
+        color: "#fff",
+        rotate: { z: Zdog.TAU / 4 },
+        translate: {
+          x: 0,
+          y: 10,
+          z: 15,
+        },
+      });
+      // --- animate --- //
+      function animate() {
+        currentRotationX +=
+          (targetRotationX -
+            currentRotationX) *
+          0.1;
+        currentRotationY +=
+          (targetRotationY -
+            currentRotationY) *
+          0.1;
+
+        illo.rotate.x =
+          currentRotationX;
+        illo.rotate.y =
+          currentRotationY;
+
+        illo.updateRenderGraph();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
     <script>
       import { gsap } from "gsap";
 
